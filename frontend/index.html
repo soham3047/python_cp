@@ -19,15 +19,101 @@
                 <p>Spawns local hospital instances using Flower Virtual Processes inside memory.</p>
                 <button id="start-btn" class="btn">🚀 Start Federated Training</button>
             </div>
-
             <div class="status-card">
                 <h3>System Console Logs</h3>
-                <div id="console-output" class="console">
-                    Ready to initialize simulation pipeline...
-                </div>
+                <div id="console-output" class="console">Ready to initialize simulation pipeline...</div>
             </div>
         </main>
+
+        <section class="prediction-section">
+            <div class="predict-card">
+                <h3>🔮 Live Clinical Dosage Predictor</h3>
+                <p>Upload a patient VCF file — age, weight and genetic mutations are extracted automatically.</p>
+
+                <form id="predict-form" class="predict-form-grid">
+
+                    <!-- Drug selector -->
+                    <div class="input-group">
+                        <label>Target Medication</label>
+                        <select id="drug-select">
+                            <option value="warfarin">Warfarin (Blood Thinner)</option>
+                            <option value="sertraline">Sertraline (Antidepressant)</option>
+                        </select>
+                    </div>
+
+                    <!-- Manual mutation dropdown (dimmed when VCF uploaded) -->
+                    <div class="input-group" id="manual-mutation-group">
+                        <label>Primary Genetic Mutation <span style="color:#64748b">(Manual Mode)</span></label>
+                        <select id="gene-mutation">
+                            <option value="0">0 - Normal / Wild Type (No Mutations)</option>
+                            <option value="1">1 - Heterozygous Variant (Moderate Impact)</option>
+                            <option value="2">2 - Homozygous Mutant (Severe Impact)</option>
+                        </select>
+                    </div>
+
+                    <!-- Age input (dimmed when VCF uploaded) -->
+                    <div class="input-group" id="age-input-group">
+                        <label>
+                            Patient Age (Years)
+                            <span id="age-auto-badge" style="display:none; margin-left:6px;
+                                background:#1d4ed8; color:#bfdbfe; font-size:11px;
+                                padding:2px 7px; border-radius:10px;">
+                                ✅ Auto-parsed
+                            </span>
+                        </label>
+                        <input type="number" id="patient-age" value="62" min="1" max="120">
+                    </div>
+
+                    <!-- Weight input (dimmed when VCF uploaded) -->
+                    <div class="input-group" id="weight-input-group">
+                        <label>
+                            Patient Weight (Kg)
+                            <span id="weight-auto-badge" style="display:none; margin-left:6px;
+                                background:#1d4ed8; color:#bfdbfe; font-size:11px;
+                                padding:2px 7px; border-radius:10px;">
+                                ✅ Auto-parsed
+                            </span>
+                        </label>
+                        <input type="number" id="patient-weight" value="78" min="10" max="250">
+                    </div>
+
+                    <!-- VCF Upload — spans full width -->
+                    <div class="form-group" style="grid-column: span 2; margin-top:15px; margin-bottom:10px;">
+                        <label for="vcfFile" style="display:block; margin-bottom:8px; font-weight:500; color:#fff;">
+                            🧬 Upload Patient VCF File
+                            <span style="color:#64748b; font-weight:normal; font-size:13px;">
+                                — Age, weight &amp; mutations parsed automatically
+                            </span>
+                        </label>
+                        <input type="file" id="vcfFile" accept=".vcf" style="
+                            width: 100%;
+                            padding: 10px;
+                            background: #1a233a;
+                            border: 1px dashed #3b82f6;
+                            color: #cbd5e1;
+                            border-radius: 6px;
+                            cursor: pointer;
+                            box-sizing: border-box;
+                        ">
+                        <small id="vcf-help-text" style="color:#94a3b8; display:block; margin-top:5px;">
+                            💡 Uploading a VCF overrides all manual fields — age, weight &amp; mutations.
+                        </small>
+                        <!-- Populated by JS after successful prediction -->
+                        <div id="auto-parsed-info" style="margin-top:6px;"></div>
+                    </div>
+
+                    <button type="submit" id="predict-btn" class="btn btn-predict" style="grid-column: span 2;">
+                        Calculate Optimal Dosage
+                    </button>
+                </form>
+
+                <div id="prediction-result" class="result-display">
+                    Result: Awaiting user input parameters...
+                </div>
+            </div>
+        </section>
     </div>
+
     <script src="app.js"></script>
 </body>
 </html>
