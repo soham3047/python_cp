@@ -1,0 +1,13 @@
+##fileformat=VCFv4.2
+##fileDate=20260520
+##source=GenieDoseGenomicSimulator_v1.0
+##reference=GRCh38
+##PatientAge=74
+##PatientWeight_KG=62
+##INFO=<ID=DP,Number=1,Type=Integer,Description="Total Depth">
+##INFO=<ID=AF,Number=A,Type=Float,Description="Allele Frequency">
+##FILTER=<ID=PASS,Description="All filters passed">
+##FORMAT=<ID=GT,Number=1,Type=String,Description="Genotype">
+#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	SAMPLE
+chr16	31093155	rs9923231	C	T	100	PASS	DP=45;AF=1.0	GT	1/1
+chr10	94942290	rs1799853	C	T	100	PASS	DP=38;AF=0.5	GT	0/1
